@@ -16,8 +16,9 @@ Imports:
     purrr,
     tidyr,
     forcats,
-    magrittr
-RoxygenNote: 7.3.0
+    magrittr,
+    tibble
+RoxygenNote: 7.3.1
 Suggests: 
     testthat (>= 2.1.0)
 Config/testthat/edition: 2
