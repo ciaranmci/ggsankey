@@ -4,14 +4,27 @@
 \alias{make_long}
 \title{make_long}
 \usage{
-make_long(.df, ..., value = NULL)
+make_long(
+  .df,
+  ...,
+  value = NULL,
+  subset.rowname = NULL,
+  subset.logic = NULL,
+  n.random = NULL
+)
 }
 \arguments{
 \item{.df}{a data frame}
 
-\item{...}{unquoted columnnames of df that you want to include in the plot.}
+\item{...}{unquoted column names of df that you want to include in the plot.}
 
 \item{value}{if each row have a weight this weight could be kept by providing column name of weight.}
+
+\item{subset.rowname}{A list of rownames to select the subset flows.}
+
+\item{subset.logic}{A list of strings that name the logic to apply to select the subset flows.}
+
+\item{n.random}{the count of randomly-selected flows to subset. Only evaluated if `subset.logic` == "random". Default is 1.}
 }
 \value{
 a longer data frame
