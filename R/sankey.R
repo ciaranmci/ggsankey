@@ -536,14 +536,14 @@ StatSankeyFlowSubset <- ggplot2::ggproto("StatSankeyFlowSubset", ggplot2::Stat,
                                                       # Narrow the subsetted flows.
                                                       flows <- flows %>%
                                                         dplyr::mutate(
-                                                          flow_start_y_range = abs( flow_start_ymax - flow_start_ymin )
-                                                          ,flow_end_y_range = abs( flow_end_ymax - flow_end_ymin )
-                                                          ,flow_start_y_mid =  flow_start_ymax - (flow_start_y_range / 2)
-                                                          ,flow_end_y_mid = flow_end_ymax - (flow_end_y_range / 2)
-                                                          ,flow_start_ytop = flow_start_y_mid + (flow_start_y_range * 0.05)
-                                                          ,flow_start_ybottom = flow_start_y_mid - (flow_start_y_range * 0.05)
-                                                          ,flow_end_ytop = flow_end_y_mid + (flow_end_y_range * 0.05)
-                                                          ,flow_end_ybottom = flow_end_y_mid - (flow_end_y_range * 0.05)
+                                                          flow_range = abs( flow_start_ymax - flow_start_ymin )
+                                                          ,flow_start_y_mid =  flow_start_ymax - (flow_range / 2)
+                                                          ,flow_end_y_mid = flow_end_ymax - (flow_range / 2)
+                                                          ,flow_range = min( flow_range )
+                                                          ,flow_start_ytop = flow_start_y_mid + (flow_range * 0.05)
+                                                          ,flow_start_ybottom = flow_start_y_mid - (flow_range * 0.05)
+                                                          ,flow_end_ytop = flow_end_y_mid + (flow_range * 0.05)
+                                                          ,flow_end_ybottom = flow_end_y_mid - (flow_range * 0.05)
                                                         )
 
 
