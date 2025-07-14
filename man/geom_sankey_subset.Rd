@@ -14,6 +14,7 @@ geom_sankey_subset(
   type = "sankey",
   width = 0.1,
   smooth = 8,
+  range.scalar = 0.1,
   inherit.aes = TRUE,
   ...
 )
@@ -36,6 +37,8 @@ geom_sankey_subset(
 \item{width}{width of nodes}
 
 \item{smooth}{how much smooth should the curve have? More means steeper curve.}
+
+\item{range.scalar}{How narrow should the subsetted flow be? It's a proportion of the maximum flow.}
 
 \item{inherit.aes}{should the geom inherit aesthetics}
 

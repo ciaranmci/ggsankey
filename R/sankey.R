@@ -416,7 +416,7 @@ StatSankeyFlowSubset <- ggplot2::ggproto("StatSankeyFlowSubset", ggplot2::Stat,
                                    required_aes = c("subset.idx"),
                                    extra_params =
                                      c("n_grid", "na.rm", "type", "width"
-                                       ,"space", "smooth"),
+                                       ,"space", "smooth", "range.scalar"),
 
                                    setup_data = function(data, params) {
                                      purrr::map(unique(data$PANEL),
@@ -539,11 +539,11 @@ StatSankeyFlowSubset <- ggplot2::ggproto("StatSankeyFlowSubset", ggplot2::Stat,
                                                           flow_range = abs( flow_start_ymax - flow_start_ymin )
                                                           ,flow_start_y_mid =  flow_start_ymax - (flow_range / 2)
                                                           ,flow_end_y_mid = flow_end_ymax - (flow_range / 2)
-                                                          ,flow_range = min( flow_range )
-                                                          ,flow_start_ytop = flow_start_y_mid + (flow_range * 0.05)
-                                                          ,flow_start_ybottom = flow_start_y_mid - (flow_range * 0.05)
-                                                          ,flow_end_ytop = flow_end_y_mid + (flow_range * 0.05)
-                                                          ,flow_end_ybottom = flow_end_y_mid - (flow_range * 0.05)
+                                                          ,flow_range = max( flow_range ) * params$range.scalar
+                                                          ,flow_start_ytop = flow_start_y_mid + (flow_range * 0.5)
+                                                          ,flow_start_ybottom = flow_start_y_mid - (flow_range * 0.5)
+                                                          ,flow_end_ytop = flow_end_y_mid + (flow_range * 0.5)
+                                                          ,flow_end_ybottom = flow_end_y_mid - (flow_range * 0.5)
                                                         )
 
 
@@ -1045,6 +1045,7 @@ geom_sankey <- function(mapping = NULL,
 #' @param type either 'sankey' or 'alluvial'
 #' @param width width of nodes
 #' @param smooth how much smooth should the curve have? More means steeper curve.
+#' @param range.scalar How narrow should the subsetted flow be? It's a proportion of the maximum flow.
 #' @param fill The fill colour for the subsetted flows.
 #' @param inherit.aes should the geom inherit aesthetics
 #' @param ... other arguments to be passed to the geom
@@ -1079,6 +1080,7 @@ geom_sankey_subset <- function(mapping = NULL,
                         type = "sankey",
                         width = .1,
                         smooth = 8,
+                        range.scalar = 0.1,
                         inherit.aes = TRUE,
                         ...
 ) {
@@ -1100,6 +1102,7 @@ geom_sankey_subset <- function(mapping = NULL,
           space = space,
           smooth = smooth,
           type = type,
+          range.scalar = range.scalar,
           params_list[[1]]
         )
       )
